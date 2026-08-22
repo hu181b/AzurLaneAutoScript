@@ -12,6 +12,8 @@
     --alas-border: rgba(68, 94, 135, .16);
     --alas-accent: #526fe5;
     --alas-accent-soft: #e7ebff;
+    --alas-aside-hover: rgba(82, 111, 229, .13);
+    --alas-aside-shadow: rgba(82, 111, 229, .26);
     --alas-on-accent: #ffffff;
     --alas-positive: #22a784;
     --alas-log-bg: #101b2c;
@@ -111,7 +113,7 @@ body {
 
 .btn-aside:hover {
     color: var(--alas-sidebar-active-text) !important;
-    background: color-mix(in srgb, var(--alas-accent) 13%, transparent);
+    background: var(--alas-aside-hover);
     border-left-color: transparent;
     transform: translateY(-1px);
 }
@@ -120,7 +122,7 @@ body {
     color: var(--alas-sidebar-active-text) !important;
     background: var(--alas-sidebar-active);
     border-left-color: transparent;
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--alas-accent) 26%, transparent), inset 0 1px 0 rgba(255, 255, 255, .62);
+    box-shadow: 0 8px 20px var(--alas-aside-shadow), inset 0 1px 0 rgba(255, 255, 255, .62);
     transform: translateY(-1px) scale(.97);
 }
 
