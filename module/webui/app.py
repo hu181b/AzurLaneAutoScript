@@ -100,6 +100,12 @@ task_handler = TaskHandler()
 class AlasGUI(Frame):
     ALAS_MENU: Dict[str, Dict[str, List[str]]]
     ALAS_ARGS: Dict[str, Dict[str, Dict[str, Dict[str, str]]]]
+    CUSTOM_THEMES = {
+        "azure": "default",
+        "harbor": "dark",
+        "sakura": "default",
+        "tactical": "dark",
+    }
     theme = "default"
 
     def initial(self) -> None:
@@ -222,10 +228,13 @@ class AlasGUI(Frame):
 
     @classmethod
     def set_theme(cls, theme="default") -> None:
+        if theme not in {"default", "dark", *cls.CUSTOM_THEMES}:
+            theme = "default"
+        base_theme = cls.CUSTOM_THEMES.get(theme, theme)
         cls.theme = theme
         State.deploy_config.Theme = theme
-        State.theme = theme
-        webconfig(theme=theme)
+        State.theme = base_theme
+        webconfig(theme=base_theme)
 
     @use_scope("menu", clear=True)
     def alas_set_menu(self) -> None:
@@ -1151,13 +1160,45 @@ class AlasGUI(Frame):
                 onclick=lambda l: set_language(l),
             ).style("text-align: center")
             put_text("Change theme / 更改主题").style("text-align: center")
+
+            def theme_label(label, value):
+                return f"✓ {label}" if self.theme == value else label
+
             put_buttons(
                 [
-                    {"label": "Light", "value": "default", "color": "light"},
-                    {"label": "Dark", "value": "dark", "color": "dark"},
+                    {
+                        "label": theme_label("Light", "default"),
+                        "value": "default",
+                        "color": "light",
+                    },
+                    {
+                        "label": theme_label("Dark", "dark"),
+                        "value": "dark",
+                        "color": "dark",
+                    },
+                    {
+                        "label": theme_label("澄海玻璃", "azure"),
+                        "value": "azure",
+                        "color": "primary",
+                    },
+                    {
+                        "label": theme_label("夜港深蓝", "harbor"),
+                        "value": "harbor",
+                        "color": "info",
+                    },
+                    {
+                        "label": theme_label("樱雾晨光", "sakura"),
+                        "value": "sakura",
+                        "color": "danger",
+                    },
+                    {
+                        "label": theme_label("战术终端", "tactical"),
+                        "value": "tactical",
+                        "color": "success",
+                    },
                 ],
                 onclick=lambda t: set_theme(t),
-            ).style("text-align: center")
+            ).style("text-align: center; --theme-picker--")
 
             # show something
             put_markdown(
@@ -1191,10 +1232,15 @@ class AlasGUI(Frame):
         else:
             add_css(filepath_css("alas-pc"))
 
-        if self.theme == "dark":
+        base_theme = self.CUSTOM_THEMES.get(self.theme, self.theme)
+        if base_theme == "dark":
             add_css(filepath_css("dark-alas"))
         else:
             add_css(filepath_css("light-alas"))
+
+        if self.theme in self.CUSTOM_THEMES:
+            add_css(filepath_css("custom-alas"))
+            add_css(filepath_css(f"{self.theme}-alas"))
 
         # Auto refresh when lost connection
         # [For develop] Disable by run `reload=0` in console
@@ -1547,3 +1593,4 @@ def app():
     )
 
     return app
+
