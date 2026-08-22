@@ -103,10 +103,17 @@ class Frame(Base):
 
     @staticmethod
     def active_button(position, value) -> None:
+        aside_state = ""
+        if position == "aside":
+            aside_state = f"""
+            $("div[style*='--aside-item--']").removeClass("aside-item-active");
+            $("div[style*='--aside-{value}--']").closest("div[style*='--aside-item--']").addClass("aside-item-active");
+            """
         run_js(
             f"""
             $("button.btn-{position}").removeClass("btn-{position}-active");
             $("div[style*='--{position}-{value}--']>button").addClass("btn-{position}-active");
+            {aside_state}
         """
         )
 
