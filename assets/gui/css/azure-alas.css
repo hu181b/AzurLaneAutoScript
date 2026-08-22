@@ -1,19 +1,73 @@
 :root {
-    --alas-bg: #edf5ff;
-    --alas-surface: rgba(255, 255, 255, .9);
-    --alas-surface-strong: #ffffff;
-    --alas-surface-soft: #eef3ff;
-    --alas-sidebar: linear-gradient(180deg, #17345f, #25285c);
+    --alas-bg: #e8f3ff;
+    --alas-surface: rgba(246, 251, 255, .56);
+    --alas-surface-strong: rgba(255, 255, 255, .72);
+    --alas-surface-soft: rgba(230, 240, 255, .68);
+    --alas-sidebar: linear-gradient(160deg, rgba(240, 248, 255, .86), rgba(203, 222, 249, .72));
+    --alas-sidebar-text: #3c567d;
+    --alas-sidebar-active-text: #214d91;
+    --alas-sidebar-active: rgba(255, 255, 255, .72);
     --alas-text: #1c2a43;
     --alas-muted: #70809c;
-    --alas-border: rgba(74, 105, 153, .17);
-    --alas-accent: #526fe5;
-    --alas-accent-soft: #e4eaff;
+    --alas-border: rgba(255, 255, 255, .74);
+    --alas-accent: #5279e8;
+    --alas-accent-soft: rgba(218, 230, 255, .7);
     --alas-positive: #1fa987;
     --alas-log-bg: #111c2e;
     --alas-log-text: #cbd9ec;
-    --alas-shadow: 0 16px 38px rgba(55, 86, 138, .15);
-    --alas-shadow-soft: 0 5px 16px rgba(55, 86, 138, .1);
-    --alas-radius: 15px;
+    --alas-shadow: 0 22px 55px rgba(48, 82, 134, .18), inset 0 1px 0 rgba(255, 255, 255, .92);
+    --alas-shadow-soft: 0 9px 28px rgba(55, 86, 138, .13), inset 0 1px 0 rgba(255, 255, 255, .88), inset 0 -1px 0 rgba(111, 151, 211, .08);
+    --alas-radius: 22px;
 }
+
+body {
+    background:
+        radial-gradient(circle at 14% 10%, rgba(143, 203, 255, .58), transparent 32%),
+        radial-gradient(circle at 88% 8%, rgba(166, 144, 255, .38), transparent 35%),
+        linear-gradient(145deg, #eaf7ff, #e8efff 48%, #f4edff);
+}
+
+#pywebio-scope-content {
+    background:
+        radial-gradient(circle at 12% 12%, rgba(119, 196, 255, .34), transparent 28%),
+        radial-gradient(circle at 88% 5%, rgba(169, 145, 255, .26), transparent 31%),
+        radial-gradient(circle at 72% 86%, rgba(103, 224, 211, .2), transparent 30%),
+        linear-gradient(145deg, rgba(239, 249, 255, .72), rgba(231, 239, 255, .68));
+}
+
+#pywebio-scope-header,
+#pywebio-scope-aside,
+#pywebio-scope-menu,
+[id^="pywebio-scope-group_"],
+#pywebio-scope-scheduler-bar,
+#pywebio-scope-log-bar,
+#pywebio-scope-running,
+#pywebio-scope-pending,
+#pywebio-scope-waiting,
+#pywebio-scope-daemon-overview #pywebio-scope-groups,
+#pywebio-scope-navigator {
+    background-image:
+        linear-gradient(135deg, rgba(255, 255, 255, .68), rgba(255, 255, 255, .28) 52%, rgba(209, 228, 255, .3));
+    border: 1px solid rgba(255, 255, 255, .78);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .96),
+        inset 0 -1px 0 rgba(97, 137, 194, .08),
+        0 10px 30px rgba(53, 91, 145, .13);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    backdrop-filter: blur(30px) saturate(190%);
+}
+
+#pywebio-scope-aside {
+    background-color: rgba(218, 233, 252, .72);
+    background-image: linear-gradient(160deg, rgba(255, 255, 255, .65), rgba(192, 216, 247, .36));
+    border-left: 1px solid rgba(255, 255, 255, .7);
+    border-right: 1px solid rgba(255, 255, 255, .82);
+}
+
+#pywebio-scope-log,
+.container-log {
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    backdrop-filter: blur(24px) saturate(170%);
+}
+
 
