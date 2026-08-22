@@ -5,8 +5,8 @@
     --alas-surface-soft: rgba(230, 240, 255, .68);
     --alas-sidebar: linear-gradient(160deg, rgba(240, 248, 255, .86), rgba(203, 222, 249, .72));
     --alas-sidebar-text: #3c567d;
-    --alas-sidebar-active-text: #214d91;
-    --alas-sidebar-active: rgba(255, 255, 255, .72);
+    --alas-sidebar-active-text: #ffffff;
+    --alas-sidebar-active: linear-gradient(145deg, rgba(79, 132, 239, .94), rgba(112, 103, 226, .9));
     --alas-text: #1c2a43;
     --alas-muted: #70809c;
     --alas-border: rgba(255, 255, 255, .74);
@@ -14,7 +14,7 @@
     --alas-accent-soft: rgba(218, 230, 255, .7);
     --alas-positive: #1fa987;
     --alas-log-bg: #111c2e;
-    --alas-log-text: #cbd9ec;
+    --alas-log-text: #d8e5f5;
     --alas-shadow: 0 22px 55px rgba(48, 82, 134, .18), inset 0 1px 0 rgba(255, 255, 255, .92);
     --alas-shadow-soft: 0 9px 28px rgba(55, 86, 138, .13), inset 0 1px 0 rgba(255, 255, 255, .88), inset 0 -1px 0 rgba(111, 151, 211, .08);
     --alas-radius: 22px;
