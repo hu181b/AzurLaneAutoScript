@@ -4,6 +4,9 @@
     --alas-surface-strong: #ffffff;
     --alas-surface-soft: #f2f6ff;
     --alas-sidebar: #172b52;
+    --alas-sidebar-text: rgba(255, 255, 255, .82);
+    --alas-sidebar-active-text: #ffffff;
+    --alas-sidebar-active: rgba(108, 137, 255, .58);
     --alas-text: #1d2940;
     --alas-muted: #71809a;
     --alas-border: rgba(68, 94, 135, .16);
@@ -15,7 +18,7 @@
     --alas-log-text: #cbd7e8;
     --alas-shadow: 0 12px 32px rgba(49, 72, 116, .13);
     --alas-shadow-soft: 0 5px 16px rgba(49, 72, 116, .09);
-    --alas-radius: 14px;
+    --alas-radius: 18px;
 }
 
 body {
@@ -29,12 +32,16 @@ body {
     background: var(--alas-surface);
     border-bottom: 1px solid var(--alas-border);
     box-shadow: var(--alas-shadow-soft);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
 }
 
 #pywebio-scope-aside {
     background: var(--alas-sidebar);
-    border-right: 0;
+    border-right: 1px solid var(--alas-border);
+    box-shadow: var(--alas-shadow-soft);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
 }
 
 #pywebio-scope-menu {
@@ -42,6 +49,8 @@ body {
     background: var(--alas-surface);
     border-right: 1px solid var(--alas-border);
     box-shadow: var(--alas-shadow-soft);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
 }
 
 #pywebio-scope-content {
@@ -56,7 +65,7 @@ body {
     color: var(--alas-text);
     margin: .08rem 0;
     padding: .3rem .75rem;
-    border-radius: 9px;
+    border-radius: 13px;
     transition: color .16s ease, background-color .16s ease, transform .16s ease;
 }
 
@@ -73,20 +82,34 @@ body {
 }
 
 .btn-aside {
-    color: rgba(255, 255, 255, .72);
+    color: var(--alas-sidebar-text) !important;
     margin: .2rem 0;
-    border-radius: 11px;
+    border-radius: 15px;
+    font-weight: 500;
+    text-shadow: none;
 }
 
 .btn-aside:hover,
 .btn-aside-active {
-    color: #ffffff;
-    background: color-mix(in srgb, var(--alas-accent) 62%, transparent);
+    color: var(--alas-sidebar-active-text) !important;
+    background: var(--alas-sidebar-active);
     border-left-color: transparent;
 }
 
-.aside-icon > path {
-    fill: currentColor;
+.btn-aside .aside-icon,
+.btn-aside .aside-icon > path,
+.btn-aside .aside-icon path {
+    color: inherit !important;
+    fill: var(--alas-sidebar-text) !important;
+}
+
+.btn-aside:hover .aside-icon,
+.btn-aside:hover .aside-icon > path,
+.btn-aside:hover .aside-icon path,
+.btn-aside-active .aside-icon,
+.btn-aside-active .aside-icon > path,
+.btn-aside-active .aside-icon path {
+    fill: var(--alas-sidebar-active-text) !important;
 }
 
 [id^="pywebio-scope-group_"],
@@ -102,6 +125,8 @@ body {
     border: 1px solid var(--alas-border);
     border-radius: var(--alas-radius);
     box-shadow: var(--alas-shadow-soft);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
 }
 
 #pywebio-scope-daemon-overview [id^="pywebio-scope-group_"] {
@@ -139,7 +164,21 @@ textarea,
     color: var(--alas-text);
     background-color: var(--alas-surface-strong);
     border-color: var(--alas-border);
-    border-radius: 8px !important;
+    border-radius: 12px !important;
+}
+
+.btn,
+.dropdown-menu,
+.alert,
+.toastify,
+.modal-content {
+    border-radius: 14px;
+}
+
+.modal-content {
+    overflow: hidden;
+    border-color: var(--alas-border);
+    box-shadow: var(--alas-shadow);
 }
 
 .form-control:focus {
@@ -187,7 +226,7 @@ input[type="checkbox"] {
 div[style*="--theme-picker--"] .btn {
     margin: .25rem;
     border: 0;
-    border-radius: 999px;
+    border-radius: 999px !important;
     padding: .45rem .9rem;
     box-shadow: var(--alas-shadow-soft);
 }
@@ -228,4 +267,5 @@ div[style*="--theme-picker--"] .btn-success { background: linear-gradient(135deg
         border-radius: 10px;
     }
 }
+
 
