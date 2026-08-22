@@ -1,0 +1,231 @@
+:root {
+    --alas-bg: #eef5ff;
+    --alas-surface: rgba(255, 255, 255, .92);
+    --alas-surface-strong: #ffffff;
+    --alas-surface-soft: #f2f6ff;
+    --alas-sidebar: #172b52;
+    --alas-text: #1d2940;
+    --alas-muted: #71809a;
+    --alas-border: rgba(68, 94, 135, .16);
+    --alas-accent: #526fe5;
+    --alas-accent-soft: #e7ebff;
+    --alas-on-accent: #ffffff;
+    --alas-positive: #22a784;
+    --alas-log-bg: #101b2c;
+    --alas-log-text: #cbd7e8;
+    --alas-shadow: 0 12px 32px rgba(49, 72, 116, .13);
+    --alas-shadow-soft: 0 5px 16px rgba(49, 72, 116, .09);
+    --alas-radius: 14px;
+}
+
+body {
+    color: var(--alas-text);
+    background: var(--alas-bg);
+    font-family: Inter, "Microsoft YaHei UI", "Segoe UI", sans-serif;
+}
+
+#pywebio-scope-header {
+    color: var(--alas-text);
+    background: var(--alas-surface);
+    border-bottom: 1px solid var(--alas-border);
+    box-shadow: var(--alas-shadow-soft);
+    backdrop-filter: blur(16px);
+}
+
+#pywebio-scope-aside {
+    background: var(--alas-sidebar);
+    border-right: 0;
+}
+
+#pywebio-scope-menu {
+    color: var(--alas-text);
+    background: var(--alas-surface);
+    border-right: 1px solid var(--alas-border);
+    box-shadow: var(--alas-shadow-soft);
+}
+
+#pywebio-scope-content {
+    color: var(--alas-text);
+    background:
+        radial-gradient(circle at 92% 2%, color-mix(in srgb, var(--alas-accent) 13%, transparent), transparent 28%),
+        var(--alas-bg);
+    padding: .9rem;
+}
+
+.btn-menu {
+    color: var(--alas-text);
+    margin: .08rem 0;
+    padding: .3rem .75rem;
+    border-radius: 9px;
+    transition: color .16s ease, background-color .16s ease, transform .16s ease;
+}
+
+.btn-menu:hover,
+.btn-menu-active {
+    color: var(--alas-accent);
+    background: var(--alas-accent-soft);
+    border-left-color: var(--alas-accent);
+    font-weight: 500;
+}
+
+.btn-menu:hover {
+    transform: translateX(2px);
+}
+
+.btn-aside {
+    color: rgba(255, 255, 255, .72);
+    margin: .2rem 0;
+    border-radius: 11px;
+}
+
+.btn-aside:hover,
+.btn-aside-active {
+    color: #ffffff;
+    background: color-mix(in srgb, var(--alas-accent) 62%, transparent);
+    border-left-color: transparent;
+}
+
+.aside-icon > path {
+    fill: currentColor;
+}
+
+[id^="pywebio-scope-group_"],
+#pywebio-scope-scheduler-bar,
+#pywebio-scope-log-bar,
+#pywebio-scope-running,
+#pywebio-scope-pending,
+#pywebio-scope-waiting,
+#pywebio-scope-daemon-overview #pywebio-scope-groups,
+#pywebio-scope-navigator {
+    color: var(--alas-text);
+    background: var(--alas-surface);
+    border: 1px solid var(--alas-border);
+    border-radius: var(--alas-radius);
+    box-shadow: var(--alas-shadow-soft);
+}
+
+#pywebio-scope-daemon-overview [id^="pywebio-scope-group_"] {
+    box-shadow: none;
+}
+
+#pywebio-scope-log {
+    background: var(--alas-log-bg);
+    border: 1px solid var(--alas-border);
+    border-radius: var(--alas-radius);
+    box-shadow: var(--alas-shadow-soft);
+}
+
+.container-log {
+    color: var(--alas-log-text) !important;
+    background: var(--alas-log-bg) !important;
+    border: 0;
+    border-radius: calc(var(--alas-radius) - 3px);
+}
+
+[id^="pywebio-scope-overview-task_"] {
+    border-radius: 9px;
+    transition: background-color .15s ease, transform .15s ease;
+}
+
+[id^="pywebio-scope-overview-task_"]:hover {
+    background: var(--alas-surface-soft);
+    transform: translateX(2px);
+}
+
+.form-control,
+.bootstrap-select > select,
+textarea,
+.CodeMirror-wrap {
+    color: var(--alas-text);
+    background-color: var(--alas-surface-strong);
+    border-color: var(--alas-border);
+    border-radius: 8px !important;
+}
+
+.form-control:focus {
+    color: var(--alas-text);
+    background-color: var(--alas-surface-strong);
+    border-color: var(--alas-accent);
+    box-shadow: 0 0 0 .16rem color-mix(in srgb, var(--alas-accent) 18%, transparent);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--alas-accent);
+}
+
+.btn-on {
+    color: var(--alas-on-accent);
+    background: var(--alas-accent);
+    border-color: var(--alas-accent);
+}
+
+.btn-off,
+.btn-navigator {
+    color: var(--alas-text);
+    background: var(--alas-surface-strong);
+    border-color: var(--alas-border);
+}
+
+.btn-navigator:hover,
+.state-bold > select {
+    color: var(--alas-accent);
+}
+
+.hr-group,
+.hr-task-group-line {
+    border-color: var(--alas-border) !important;
+    background: var(--alas-border) !important;
+}
+
+.hr-task-group-text,
+*[style*="--arg-help--"],
+[id^="pywebio-scope-group_"] > p + p,
+.state-light > select {
+    color: var(--alas-muted);
+}
+
+div[style*="--theme-picker--"] .btn {
+    margin: .25rem;
+    border: 0;
+    border-radius: 999px;
+    padding: .45rem .9rem;
+    box-shadow: var(--alas-shadow-soft);
+}
+
+div[style*="--theme-picker--"] .btn-primary { background: linear-gradient(135deg, #56a6ff, #7d72ea); }
+div[style*="--theme-picker--"] .btn-info { background: linear-gradient(135deg, #152d52, #3979d9); color: #fff; }
+div[style*="--theme-picker--"] .btn-danger { background: linear-gradient(135deg, #e990b0, #9b87df); }
+div[style*="--theme-picker--"] .btn-success { background: linear-gradient(135deg, #20342f, #35b894); }
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--alas-muted) 42%, transparent);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+}
+
+@media (max-width: 700px) {
+    #pywebio-scope-content {
+        padding: .55rem;
+    }
+
+    [id^="pywebio-scope-group_"],
+    #pywebio-scope-scheduler-bar,
+    #pywebio-scope-log-bar,
+    #pywebio-scope-log,
+    #pywebio-scope-running,
+    #pywebio-scope-pending,
+    #pywebio-scope-waiting {
+        border-radius: 10px;
+    }
+}
+
