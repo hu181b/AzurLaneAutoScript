@@ -4,6 +4,9 @@
     --alas-surface-strong: #fffafd;
     --alas-surface-soft: #fae8f0;
     --alas-sidebar: linear-gradient(180deg, #5b466f, #40385f);
+    --alas-sidebar-text: #f5eefa;
+    --alas-sidebar-active-text: #ffffff;
+    --alas-sidebar-active: rgba(234, 157, 193, .44);
     --alas-text: #41374e;
     --alas-muted: #8d7d96;
     --alas-border: rgba(133, 92, 129, .16);
@@ -14,7 +17,7 @@
     --alas-log-text: #e7dce7;
     --alas-shadow: 0 16px 38px rgba(124, 79, 110, .15);
     --alas-shadow-soft: 0 5px 16px rgba(124, 79, 110, .1);
-    --alas-radius: 16px;
+    --alas-radius: 21px;
 }
 
 #pywebio-scope-content {
@@ -22,4 +25,5 @@
         radial-gradient(circle at 92% 2%, rgba(232, 157, 187, .24), transparent 30%),
         var(--alas-bg);
 }
+
 
