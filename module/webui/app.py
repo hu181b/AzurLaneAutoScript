@@ -79,6 +79,7 @@ from module.webui.utils import (
     parse_pin_value,
     raise_exception,
     re_fullmatch,
+    remove_css,
     to_pin_value,
 )
 from module.webui.widgets import (
@@ -246,6 +247,50 @@ class AlasGUI(Frame):
         State.deploy_config.Theme = theme
         State.theme = base_theme
         webconfig(theme=base_theme)
+
+    def switch_theme(self, theme: str) -> None:
+        self.set_theme(theme)
+        base_theme = self.CUSTOM_THEMES.get(theme, theme)
+        base_css = "dark" if base_theme == "dark" else "light"
+
+        add_css(filepath_css(f"{base_css}-alas"), style_id="alas-base-theme")
+        if theme in self.CUSTOM_THEMES:
+            add_css(filepath_css("custom-alas"), style_id="alas-custom-theme")
+            add_css(filepath_css(f"{theme}-alas"), style_id="alas-selected-theme")
+        else:
+            remove_css("alas-custom-theme")
+            remove_css("alas-selected-theme")
+
+        run_js(
+            f"""
+            (() => {{
+                const baseTheme = {json.dumps(base_theme)};
+                const selectedTheme = {json.dumps(theme)};
+                const themeLink = document.querySelector('link[href*="css/bs-theme/"]');
+                if (themeLink) {{
+                    themeLink.href = themeLink.href.replace(
+                        /css\/bs-theme\/[^/]+\.min\.css/,
+                        `css/bs-theme/${{baseTheme}}.min.css`
+                    );
+                }}
+                document.body.classList.remove('webio-theme-default', 'webio-theme-dark');
+                document.body.classList.add(`webio-theme-${{baseTheme}}`);
+
+                const labels = {{
+                    default: 'Light',
+                    dark: 'Dark',
+                    azure: '澄海玻璃',
+                    harbor: '夜港深蓝',
+                    sakura: '樱雾晨光',
+                    tactical: '战术终端'
+                }};
+                document.querySelectorAll('div[style*="--theme-picker--"] button').forEach((button) => {{
+                    const plain = button.textContent.trim().replace(/^✓\s*/, '');
+                    button.textContent = plain === labels[selectedTheme] ? `✓ ${{plain}}` : plain;
+                }});
+            }})();
+            """
+        )
 
     @use_scope("menu", clear=True)
     def alas_set_menu(self) -> None:
@@ -1171,8 +1216,7 @@ class AlasGUI(Frame):
             self.show()
 
         def set_theme(t):
-            self.set_theme(t)
-            run_js("location.reload()")
+            self.switch_theme(t)
 
         with use_scope("content"):
             put_text("Select your language / 选择语言").style("text-align: center")
@@ -1259,14 +1303,15 @@ class AlasGUI(Frame):
             add_css(filepath_css("alas-pc"))
 
         base_theme = self.CUSTOM_THEMES.get(self.theme, self.theme)
-        if base_theme == "dark":
-            add_css(filepath_css("dark-alas"))
-        else:
-            add_css(filepath_css("light-alas"))
+        base_css = "dark" if base_theme == "dark" else "light"
+        add_css(filepath_css(f"{base_css}-alas"), style_id="alas-base-theme")
 
         if self.theme in self.CUSTOM_THEMES:
-            add_css(filepath_css("custom-alas"))
-            add_css(filepath_css(f"{self.theme}-alas"))
+            add_css(filepath_css("custom-alas"), style_id="alas-custom-theme")
+            add_css(
+                filepath_css(f"{self.theme}-alas"),
+                style_id="alas-selected-theme",
+            )
 
         # Auto refresh when lost connection
         # [For develop] Disable by run `reload=0` in console

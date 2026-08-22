@@ -1,4 +1,5 @@
 import datetime
+import json
 import operator
 import re
 import sys
@@ -367,10 +368,37 @@ def filepath_icon(filename):
     return f"./assets/gui/icon/{filename}.svg"
 
 
-def add_css(filepath):
+def add_css(filepath, style_id=None):
     with open(filepath, "r") as f:
-        css = f.read().replace("\n", "")
-        run_js(f"""$('head').append('<style>{css}</style>')""")
+        css = f.read()
+    if style_id is None:
+        run_js(f"""$('head').append($('<style>').text({json.dumps(css)}))""")
+        return
+    run_js(
+        f"""
+        (() => {{
+            const id = {json.dumps(style_id)};
+            let style = document.getElementById(id);
+            if (!style) {{
+                style = document.createElement('style');
+                style.id = id;
+                document.head.appendChild(style);
+            }}
+            style.textContent = {json.dumps(css)};
+        }})();
+        """
+    )
+
+
+def remove_css(style_id):
+    run_js(
+        f"""
+        (() => {{
+            const style = document.getElementById({json.dumps(style_id)});
+            if (style) style.remove();
+        }})();
+        """
+    )
 
 
 def _read(path):

@@ -2,6 +2,53 @@
 
 # AzurLaneAutoScript
 
+## 本仓库说明 / Fork Notice
+
+> [!IMPORTANT]
+> 本仓库是基于 **AzurLaneAutoScript（Alas）** 的个人维护分支，并非原项目的官方发行版。
+
+- **原始项目（上游）**：[LmeSzinc/AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript)
+- **本维护分支**：[hu181b/AzurLaneAutoScript](https://github.com/hu181b/AzurLaneAutoScript)
+- Alas 的自动化功能、基础架构和绝大部分代码均来源于原始项目及其贡献者。
+- 本仓库遵循原项目的 [GNU GPL v3 许可证](LICENSE)，并保留原项目的版权、贡献者信息和开源声明。
+- 本分支中的个性化修改仅在本仓库维护，不代表上游项目，也不会自动反向合并或提交到上游。
+
+### 与上游项目的更新关系
+
+本仓库以原项目的 `master` 分支作为上游更新来源，并通过自动同步工作流定期检查更新：
+
+- 上游未修改本分支相关代码时，正常合并上游的新功能和修复。
+- 双方修改同一位置时，优先保留本分支的个性化内容。
+- 遇到无法安全处理的结构性冲突时停止同步，避免错误覆盖或推送。
+- Alas 内置更新地址指向本维护分支，因此日常更新会从本仓库获取经过同步和保留个性化修改的版本。
+
+### 本分支的主要修改
+
+截至 [`save-8.22`](https://github.com/hu181b/AzurLaneAutoScript/tree/save-8.22) 节点，本分支主要进行了以下调整：
+
+1. **新增 WebUI 主题**
+   - 澄海玻璃：蓝白圆角玻璃风格。
+   - 夜港深蓝：深蓝高对比度风格。
+   - 樱雾晨光：浅樱粉柔和风格。
+   - 战术终端：中性炭黑背景与橙色强调的 Codex 风格。
+2. **统一界面视觉与交互**
+   - 调整主侧栏、菜单、选中状态、文字和图标对比度。
+   - 统一总览卡片、日志区域、表单、按钮及管理配置页面的圆角样式。
+   - 管理配置页面会继承当前主题，并支持在主 WebUI 会话内快速进入和返回。
+3. **优化 WebUI 性能**
+   - 缓存静态菜单和参数定义，避免重复读取与解析。
+   - 批量渲染菜单和设置分组，减少浏览器与后端之间的消息数量。
+   - 控制日志渲染数量和刷新频率，降低长时间运行后的界面负担。
+   - 移除大面积模糊、位移动画等容易引起卡顿的效果。
+4. **调整更新与维护方式**
+   - 更新来源改为本维护分支。
+   - 增加安全同步上游的自动工作流和本地同步辅助脚本。
+   - 使用 Git 标签保存已验证节点，便于出现问题时回退。
+
+### 问题反馈说明
+
+如果问题只在本维护分支出现，尤其是主题、WebUI、更新或性能问题，请在本仓库反馈，不要将本分支特有问题提交给原项目。若确认问题可以在未经修改的上游版本中复现，请遵循原项目的问题模板和社区准则向上游反馈。
+
 #### Discord [![](https://img.shields.io/discord/720789890354249748?logo=discord&logoColor=ffffff&color=4e4c97)](https://discord.gg/AQN6GeJ) QQ群  ![](https://img.shields.io/badge/QQ%20Group-1087735381-4e4c97)
 Azur Lane bot with GUI (Supports CN, EN, JP, TW, able to support other servers), designed for 24/7 running scenes, can take over almost all Azur Lane gameplay. Azur Lane, as a mobile game, has entered the late stage of its life cycle. During the period from now to the server down, please reduce the time spent on the Azur Lane and leave everything to Alas.
 
