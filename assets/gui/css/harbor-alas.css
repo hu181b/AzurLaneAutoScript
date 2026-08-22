@@ -1,0 +1,30 @@
+:root {
+    --alas-bg: #081321;
+    --alas-surface: rgba(14, 30, 49, .94);
+    --alas-surface-strong: #12263d;
+    --alas-surface-soft: #152d49;
+    --alas-sidebar: linear-gradient(180deg, #06101c, #0d1d31);
+    --alas-text: #e7f0fc;
+    --alas-muted: #91a6c0;
+    --alas-border: rgba(122, 164, 215, .18);
+    --alas-accent: #6393ff;
+    --alas-accent-soft: #19345e;
+    --alas-positive: #50d3ad;
+    --alas-log-bg: #07111e;
+    --alas-log-text: #cad8e9;
+    --alas-shadow: 0 18px 44px rgba(0, 7, 17, .42);
+    --alas-shadow-soft: 0 6px 18px rgba(0, 7, 17, .28);
+    --alas-radius: 14px;
+}
+
+body,
+.modal-body {
+    color: var(--alas-text);
+    background: var(--alas-bg);
+}
+
+pre.rich-traceback-code {
+    color: #d6e2f1;
+    background: #07111e;
+}
+
