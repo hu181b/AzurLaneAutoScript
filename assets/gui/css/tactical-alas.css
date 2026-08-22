@@ -4,6 +4,9 @@
     --alas-surface-strong: #1b2824;
     --alas-surface-soft: #19362f;
     --alas-sidebar: #0a1110;
+    --alas-sidebar-text: #b9d4ca;
+    --alas-sidebar-active-text: #effff9;
+    --alas-sidebar-active: rgba(63, 197, 161, .3);
     --alas-text: #e0ede8;
     --alas-muted: #91a69f;
     --alas-border: rgba(127, 176, 160, .17);
@@ -14,7 +17,7 @@
     --alas-log-text: #c6ddd5;
     --alas-shadow: 0 16px 40px rgba(0, 9, 6, .4);
     --alas-shadow-soft: 0 5px 15px rgba(0, 9, 6, .27);
-    --alas-radius: 7px;
+    --alas-radius: 15px;
 }
 
 body,
@@ -37,11 +40,12 @@ body,
 .bootstrap-select > select,
 textarea,
 .CodeMirror-wrap {
-    border-radius: 4px !important;
+    border-radius: 10px !important;
 }
 
 pre.rich-traceback-code {
     color: #cae0d8;
     background: #080f0d;
 }
+
 
