@@ -12,6 +12,8 @@
     --alas-border: rgba(255, 255, 255, .74);
     --alas-accent: #5279e8;
     --alas-accent-soft: rgba(218, 230, 255, .7);
+    --alas-aside-hover: rgba(82, 121, 232, .14);
+    --alas-aside-shadow: rgba(65, 104, 205, .3);
     --alas-positive: #1fa987;
     --alas-log-bg: #111c2e;
     --alas-log-text: #d8e5f5;
