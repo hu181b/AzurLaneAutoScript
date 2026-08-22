@@ -1,0 +1,25 @@
+:root {
+    --alas-bg: #f8f1f7;
+    --alas-surface: rgba(255, 251, 253, .92);
+    --alas-surface-strong: #fffafd;
+    --alas-surface-soft: #fae8f0;
+    --alas-sidebar: linear-gradient(180deg, #5b466f, #40385f);
+    --alas-text: #41374e;
+    --alas-muted: #8d7d96;
+    --alas-border: rgba(133, 92, 129, .16);
+    --alas-accent: #bf6d92;
+    --alas-accent-soft: #f9e2ec;
+    --alas-positive: #649f87;
+    --alas-log-bg: #292232;
+    --alas-log-text: #e7dce7;
+    --alas-shadow: 0 16px 38px rgba(124, 79, 110, .15);
+    --alas-shadow-soft: 0 5px 16px rgba(124, 79, 110, .1);
+    --alas-radius: 16px;
+}
+
+#pywebio-scope-content {
+    background:
+        radial-gradient(circle at 92% 2%, rgba(232, 157, 187, .24), transparent 30%),
+        var(--alas-bg);
+}
+
