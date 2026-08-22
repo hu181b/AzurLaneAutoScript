@@ -109,9 +109,18 @@ class AlasGUI(Frame):
     theme = "default"
 
     def initial(self) -> None:
-        self.ALAS_MENU = read_file(filepath_args("menu", self.alas_mod))
-        self.ALAS_ARGS = read_file(filepath_args("args", self.alas_mod))
-        self._init_alas_config_watcher()
+        definitions = self._definition_cache.get(self.alas_mod)
+        if definitions is None:
+            definitions = (
+                read_file(filepath_args("menu", self.alas_mod)),
+                read_file(filepath_args("args", self.alas_mod)),
+            )
+            self._definition_cache[self.alas_mod] = definitions
+        self.ALAS_MENU, self.ALAS_ARGS = definitions
+
+        if self.alas_mod not in self._watched_mods:
+            self._init_alas_config_watcher()
+            self._watched_mods.add(self.alas_mod)
 
     def __init__(self) -> None:
         super().__init__()
@@ -121,6 +130,8 @@ class AlasGUI(Frame):
         self.alas_name = ""
         self.alas_mod = "alas"
         self.alas_config = AzurLaneConfig("template")
+        self._definition_cache = {}
+        self._watched_mods = set()
         self.initial()
         # rendered state cache
         self.rendered_cache = []
@@ -155,7 +166,7 @@ class AlasGUI(Frame):
                     "color": "aside",
                 }
             ],
-            onclick=[lambda: go_app("manage", new_window=False)],
+            onclick=[self.ui_manage],
         )
 
 
@@ -241,16 +252,18 @@ class AlasGUI(Frame):
         """
         Set menu
         """
-        put_buttons(
-            [
-                {
-                    "label": t("Gui.MenuAlas.Overview"),
-                    "value": "Overview",
-                    "color": "menu",
-                }
-            ],
-            onclick=[self.alas_overview],
-        ).style(f"--menu-Overview--")
+        menu_content = [
+            put_buttons(
+                [
+                    {
+                        "label": t("Gui.MenuAlas.Overview"),
+                        "value": "Overview",
+                        "color": "menu",
+                    }
+                ],
+                onclick=[self.alas_overview],
+            ).style("--menu-Overview--")
+        ]
 
         for menu, task_data in self.ALAS_MENU.items():
             if task_data.get("page") == "tool":
@@ -272,27 +285,37 @@ class AlasGUI(Frame):
                     ).style(f"--menu-{task}--")
                     for task in task_data.get("tasks", [])
                 ]
-                put_collapse(title=t(f"Menu.{menu}.name"), content=task_btn_list)
+                menu_content.append(
+                    put_collapse(title=t(f"Menu.{menu}.name"), content=task_btn_list)
+                )
             else:
                 title = t(f"Menu.{menu}.name")
-                put_html(
-                    '<div class="hr-task-group-box">'
-                    '<span class="hr-task-group-line"></span>'
-                    f'<span class="hr-task-group-text">{title}</span>'
-                    '<span class="hr-task-group-line"></span>'
-                    '</div>'
+                menu_content.append(
+                    put_html(
+                        '<div class="hr-task-group-box">'
+                        '<span class="hr-task-group-line"></span>'
+                        f'<span class="hr-task-group-text">{title}</span>'
+                        '<span class="hr-task-group-line"></span>'
+                        '</div>'
+                    )
                 )
                 for task in task_data.get("tasks", []):
-                    put_buttons(
-                        [
-                            {
-                                "label": t(f"Task.{task}.name"),
-                                "value": task,
-                                "color": "menu",
-                            }
-                        ],
-                        onclick=_onclick,
-                    ).style(f"--menu-{task}--").style(f"padding-left: 0.75rem")
+                    menu_content.append(
+                        put_buttons(
+                            [
+                                {
+                                    "label": t(f"Task.{task}.name"),
+                                    "value": task,
+                                    "color": "menu",
+                                }
+                            ],
+                            onclick=_onclick,
+                        ).style(f"--menu-{task}--").style("padding-left: 0.75rem")
+                    )
+
+        # Send the whole navigation tree in one message instead of one message
+        # per task. This noticeably reduces the Home -> instance transition cost.
+        put_scope("alas-menu-content", menu_content)
 
         self.alas_overview()
 
@@ -385,21 +408,19 @@ class AlasGUI(Frame):
 
             o = put_output(output_kwargs)
             if o is not None:
-                # output will inherit current scope when created, override here
-                o.spec["scope"] = f"#pywebio-scope-group_{group_name}"
                 output_list.append(o)
 
         if not output_list:
             return 0
 
-        with use_scope(f"group_{group_name}"):
-            put_text(t(f"{group_name}._info.name"))
-            group_help = t(f"{group_name}._info.help")
-            if group_help != "":
-                put_text(group_help)
-            put_html('<hr class="hr-group">')
-            for output in output_list:
-                output.show()
+        group_content = [put_text(t(f"{group_name}._info.name"))]
+        group_help = t(f"{group_name}._info.help")
+        if group_help != "":
+            group_content.append(put_text(group_help))
+        group_content.append(put_html('<hr class="hr-group">'))
+        group_content.extend(output_list)
+        # Send a complete group in one message instead of one message per control.
+        put_scope(f"group_{group_name}", group_content)
 
         return len(output_list)
 
@@ -505,7 +526,7 @@ class AlasGUI(Frame):
         self.task_handler.add(switch_scheduler.g(), 1, True)
         self.task_handler.add(switch_log_scroll.g(), 1, True)
         self.task_handler.add(self.alas_update_overview_task, 10, True)
-        self.task_handler.add(log.put_log(self.alas), 0.25, True)
+        self.task_handler.add(log.put_log(self.alas), 0.75, True)
 
     def _init_alas_config_watcher(self) -> None:
         def put_queue(path, value):
@@ -749,7 +770,7 @@ class AlasGUI(Frame):
 
         self.task_handler.add(switch_scheduler.g(), 1, True)
         self.task_handler.add(switch_log_scroll.g(), 1, True)
-        self.task_handler.add(log.put_log(self.alas), 0.25, True)
+        self.task_handler.add(log.put_log(self.alas), 0.75, True)
 
     @use_scope("menu", clear=True)
     def dev_set_menu(self) -> None:
@@ -1051,6 +1072,11 @@ class AlasGUI(Frame):
             del self.alas
         self.state_switch.switch()
 
+    def ui_manage(self) -> None:
+        self.init_aside(name="AddAlas")
+        self.set_title(t("Gui.AppManage.PageTitle"))
+        app_manage(back=self.ui_develop, embedded=True)
+
     def ui_alas(self, config_name: str) -> None:
         if config_name == self.alas_name:
             self.expand_menu()
@@ -1325,7 +1351,7 @@ class AlasGUI(Frame):
             self.ui_alas(aside)
 
 
-def app_manage():
+def app_manage(back=None, embedded: bool = False):
     def _import():
         resp = file_upload(
             label=t("Gui.AppManage.Import"),
@@ -1448,27 +1474,42 @@ def app_manage():
             scope="config_table",
         )
 
-    set_env(title="Alas", output_animation=False)
-    run_js("$('head').append('<style>.footer{display:none}</style>')")
+    if not embedded:
+        set_env(title="Alas", output_animation=False)
+        if State.deploy_config.Theme in AlasGUI.CUSTOM_THEMES:
+            add_css(filepath_css("custom-alas"))
+            add_css(filepath_css(f"{State.deploy_config.Theme}-alas"))
+        run_js(
+            "document.body.classList.add('alas-manage-page');"
+            "$('head').append('<style>.footer{display:none}</style>')"
+        )
 
-    put_html(f"<h2>{t('Gui.AppManage.PageTitle')}</h2>")
-    put_scope("config_table")
-    put_buttons(
-        buttons=[
-            {
-                "label": t("Gui.AppManage.New"),
-                "value": "new",
-                "disabled": IS_ON_PHONE_CLOUD,
-            },
-            {"label": t("Gui.AppManage.Import"), "value": "import"},
-            {"label": t("Gui.AppManage.Back"), "value": "back"},
-        ],
-        onclick=[
-            (lambda: None) if IS_ON_PHONE_CLOUD else _new,
-            _import,
-            partial(go_app, "index", new_window=False),
-        ],
-    )
+    back_action = back or partial(go_app, "index", new_window=False)
+    manage_content = [
+        put_html(f"<h2>{t('Gui.AppManage.PageTitle')}</h2>"),
+        put_scope("config_table"),
+        put_buttons(
+            buttons=[
+                {
+                    "label": t("Gui.AppManage.New"),
+                    "value": "new",
+                    "disabled": IS_ON_PHONE_CLOUD,
+                },
+                {"label": t("Gui.AppManage.Import"), "value": "import"},
+                {"label": t("Gui.AppManage.Back"), "value": "back"},
+            ],
+            onclick=[
+                (lambda: None) if IS_ON_PHONE_CLOUD else _new,
+                _import,
+                back_action,
+            ],
+        ),
+    ]
+    if embedded:
+        with use_scope("content", clear=True):
+            put_scope("manage-content", manage_content).style("--manage-content--")
+    else:
+        put_scope("manage-content", manage_content)
     _show_table()
 
 

@@ -3,15 +3,18 @@
     --alas-surface: rgba(255, 251, 253, .92);
     --alas-surface-strong: #fffafd;
     --alas-surface-soft: #fae8f0;
-    --alas-sidebar: linear-gradient(180deg, #5b466f, #40385f);
-    --alas-sidebar-text: #f5eefa;
-    --alas-sidebar-active-text: #ffffff;
-    --alas-sidebar-active: rgba(234, 157, 193, .44);
+    --alas-sidebar: linear-gradient(165deg, rgba(255, 248, 252, .98), rgba(245, 220, 234, .94));
+    --alas-sidebar-text: #563d53;
+    --alas-sidebar-active-text: #3f2338;
+    --alas-sidebar-active: linear-gradient(145deg, rgba(255, 240, 248, .98), rgba(236, 190, 213, .88));
     --alas-text: #41374e;
     --alas-muted: #8d7d96;
     --alas-border: rgba(133, 92, 129, .16);
     --alas-accent: #bf6d92;
     --alas-accent-soft: #f9e2ec;
+    --alas-aside-hover: rgba(191, 109, 146, .12);
+    --alas-aside-shadow: rgba(158, 91, 126, .18);
+    --alas-on-accent: #ffffff;
     --alas-positive: #649f87;
     --alas-log-bg: #292232;
     --alas-log-text: #e7dce7;
@@ -24,6 +27,43 @@
     background:
         radial-gradient(circle at 92% 2%, rgba(232, 157, 187, .24), transparent 30%),
         var(--alas-bg);
+}
+
+#pywebio-scope-aside {
+    border-right-color: rgba(161, 101, 137, .18);
+    box-shadow: inset -1px 0 rgba(255, 255, 255, .72), 4px 0 18px rgba(126, 76, 108, .08);
+}
+
+#pywebio-scope-aside div[style*="--aside-item--"] {
+    margin: .18rem 0;
+    border: 1px solid transparent;
+    border-radius: 16px;
+}
+
+#pywebio-scope-aside div[style*="--aside-item--"]:hover {
+    background: rgba(191, 109, 146, .09);
+    border-color: rgba(191, 109, 146, .08);
+}
+
+#pywebio-scope-aside div[style*="--aside-item--"].aside-item-active,
+#pywebio-scope-aside div[style*="--aside-item--"].aside-item-active:hover {
+    background: linear-gradient(145deg, rgba(255, 246, 251, .99), rgba(233, 184, 209, .94));
+    border-color: rgba(177, 91, 134, .38);
+    box-shadow: inset 3px 0 0 var(--alas-accent), 0 5px 14px var(--alas-aside-shadow);
+}
+
+#pywebio-scope-aside .btn-aside-active,
+#pywebio-scope-aside .btn-aside-active:hover {
+    color: #2d1727 !important;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+#pywebio-scope-aside .aside-item-active .aside-icon,
+#pywebio-scope-aside .aside-item-active .aside-icon > path,
+#pywebio-scope-aside .aside-item-active .aside-icon path {
+    fill: #2d1727 !important;
 }
 
 

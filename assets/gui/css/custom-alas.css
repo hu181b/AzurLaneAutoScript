@@ -273,6 +273,156 @@ div[style*="--theme-picker--"] .btn-info { background: linear-gradient(135deg, #
 div[style*="--theme-picker--"] .btn-danger { background: linear-gradient(135deg, #e990b0, #9b87df); }
 div[style*="--theme-picker--"] .btn-success { background: linear-gradient(135deg, #20342f, #35b894); }
 
+/* Keep the standalone configuration manager visually aligned with the main UI. */
+body.alas-manage-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--alas-accent) 10%, transparent), transparent 34%),
+        var(--alas-bg);
+}
+
+body.alas-manage-page .pywebio {
+    min-height: 100vh;
+    padding: clamp(1.25rem, 4vw, 3.5rem) 1rem;
+}
+
+body.alas-manage-page #output-container {
+    width: min(54rem, calc(100% - 2rem));
+    max-width: 54rem;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    color: var(--alas-text);
+    background: var(--alas-surface);
+    border: 1px solid var(--alas-border);
+    border-radius: 24px;
+    box-shadow: var(--alas-shadow-soft);
+}
+
+body.alas-manage-page h2 {
+    margin-bottom: 1.25rem;
+    color: var(--alas-text);
+    font-weight: 650;
+}
+
+body.alas-manage-page #pywebio-scope-config_table table {
+    display: table;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    color: var(--alas-text);
+    background: var(--alas-surface-strong);
+    border: 1px solid var(--alas-border);
+    border-radius: 16px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    box-shadow: var(--alas-shadow-soft);
+}
+
+body.alas-manage-page #pywebio-scope-config_table table th {
+    color: var(--alas-text);
+    background: var(--alas-surface-soft);
+}
+
+body.alas-manage-page #pywebio-scope-config_table table td,
+body.alas-manage-page #pywebio-scope-config_table table th {
+    padding: .75rem 1rem;
+    vertical-align: middle;
+    border-color: var(--alas-border);
+}
+
+body.alas-manage-page #pywebio-scope-config_table table tbody tr:hover {
+    background: var(--alas-accent-soft);
+}
+
+body.alas-manage-page .btn {
+    border-radius: 12px;
+}
+
+#pywebio-scope-manage-content {
+    width: min(54rem, calc(100% - 2rem));
+    max-width: 54rem;
+    margin: 1rem auto;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    color: var(--alas-text);
+    background: var(--alas-surface);
+    border: 1px solid var(--alas-border);
+    border-radius: 24px;
+    box-shadow: var(--alas-shadow-soft);
+}
+
+#pywebio-scope-manage-content h2 {
+    margin-bottom: 1.25rem;
+    color: var(--alas-text);
+    font-weight: 650;
+}
+
+#pywebio-scope-manage-content #pywebio-scope-config_table table {
+    display: table;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    color: var(--alas-text);
+    background: var(--alas-surface-strong);
+    border: 1px solid var(--alas-border);
+    border-radius: 16px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    box-shadow: var(--alas-shadow-soft);
+}
+
+#pywebio-scope-manage-content #pywebio-scope-config_table table th {
+    color: var(--alas-text);
+    background: var(--alas-surface-soft);
+}
+
+#pywebio-scope-manage-content #pywebio-scope-config_table table td,
+#pywebio-scope-manage-content #pywebio-scope-config_table table th {
+    padding: .75rem 1rem;
+    vertical-align: middle;
+    border-color: var(--alas-border);
+}
+
+#pywebio-scope-manage-content #pywebio-scope-config_table table tbody tr:hover {
+    background: var(--alas-accent-soft);
+}
+
+#pywebio-scope-manage-content .btn {
+    border-radius: 12px;
+}
+
+/* Avoid expensive full-window blur and compositor transforms on menu switches. */
+#pywebio-scope-header,
+#pywebio-scope-aside,
+#pywebio-scope-menu,
+[id^="pywebio-scope-group_"],
+#pywebio-scope-scheduler-bar,
+#pywebio-scope-log-bar,
+#pywebio-scope-running,
+#pywebio-scope-pending,
+#pywebio-scope-waiting,
+#pywebio-scope-daemon-overview #pywebio-scope-groups,
+#pywebio-scope-navigator {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+.btn-menu,
+#pywebio-scope-menu details > summary,
+.btn-aside,
+[id^="pywebio-scope-overview-task_"] {
+    transition-duration: .08s;
+}
+
+.btn-menu:hover,
+#pywebio-scope-menu details > summary:hover,
+.btn-aside:hover,
+.btn-aside-active,
+[id^="pywebio-scope-overview-task_"]:hover {
+    transform: none;
+}
+
 ::-webkit-scrollbar {
     width: 9px;
     height: 9px;

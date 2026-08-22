@@ -23,18 +23,78 @@
 }
 
 body {
+    background: linear-gradient(145deg, #edf8ff, #e8efff 52%, #f5f1ff);
+}
+
+body.alas-manage-page {
+    min-height: 100vh;
     background:
-        radial-gradient(circle at 14% 10%, rgba(143, 203, 255, .58), transparent 32%),
-        radial-gradient(circle at 88% 8%, rgba(166, 144, 255, .38), transparent 35%),
-        linear-gradient(145deg, #eaf7ff, #e8efff 48%, #f4edff);
+        radial-gradient(circle at 14% 8%, rgba(116, 196, 255, .28), transparent 34%),
+        linear-gradient(145deg, #edf8ff, #e7efff 54%, #f3efff);
+}
+
+body.alas-manage-page .pywebio {
+    min-height: 100vh;
+    padding: clamp(1.25rem, 4vw, 3.5rem) 1rem;
+}
+
+body.alas-manage-page #output-container {
+    width: min(54rem, calc(100% - 2rem));
+    max-width: 54rem;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    background: linear-gradient(145deg, rgba(255, 255, 255, .82), rgba(225, 240, 255, .66));
+    border: 1px solid rgba(255, 255, 255, .9);
+    border-radius: 24px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .96), 0 18px 45px rgba(53, 91, 145, .14);
+}
+
+body.alas-manage-page h2 {
+    margin-bottom: 1.25rem;
+    color: #17355c;
+    font-weight: 650;
+}
+
+body.alas-manage-page #pywebio-scope-config_table table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    color: #1c3659;
+    background: rgba(249, 253, 255, .82);
+    border: 1px solid rgba(106, 148, 207, .2);
+    border-radius: 16px;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 5px 14px rgba(53, 91, 145, .07);
+}
+
+body.alas-manage-page #pywebio-scope-config_table table thead th {
+    color: #244a78;
+    background: rgba(218, 235, 255, .72);
+    border-color: rgba(106, 148, 207, .2);
+}
+
+body.alas-manage-page #pywebio-scope-config_table table td,
+body.alas-manage-page #pywebio-scope-config_table table th {
+    padding: .75rem 1rem;
+    vertical-align: middle;
+    border-color: rgba(106, 148, 207, .16);
+}
+
+body.alas-manage-page #pywebio-scope-config_table table tbody tr:hover {
+    background: rgba(218, 235, 255, .38);
+}
+
+body.alas-manage-page .btn {
+    border-radius: 12px;
 }
 
 #pywebio-scope-content {
     background:
-        radial-gradient(circle at 12% 12%, rgba(119, 196, 255, .34), transparent 28%),
-        radial-gradient(circle at 88% 5%, rgba(169, 145, 255, .26), transparent 31%),
-        radial-gradient(circle at 72% 86%, rgba(103, 224, 211, .2), transparent 30%),
-        linear-gradient(145deg, rgba(239, 249, 255, .72), rgba(231, 239, 255, .68));
+        radial-gradient(circle at 10% 8%, rgba(119, 196, 255, .22), transparent 30%),
+        linear-gradient(145deg, #eff9ff, #e8f0ff);
 }
 
 #pywebio-scope-header,
@@ -67,41 +127,62 @@ body {
 }
 
 #pywebio-scope-aside .btn-aside {
-    color: #0d294f !important;
-    background: linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(220, 237, 255, .86));
-    border: 1px solid rgba(71, 115, 177, .24);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .96), 0 3px 8px rgba(48, 83, 135, .12);
+    color: #16365f !important;
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
     font-size: .86rem;
-    font-weight: 700;
+    font-weight: 600;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .9);
+}
+
+#pywebio-scope-aside div[style*="--aside-item--"] {
+    margin: .18rem 0;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    transition: background-color .08s ease, border-color .08s ease, box-shadow .08s ease;
+}
+
+#pywebio-scope-aside div[style*="--aside-item--"]:hover {
+    background: rgba(82, 121, 232, .1);
+    border-color: rgba(82, 121, 232, .08);
+}
+
+#pywebio-scope-aside .aside-item-active,
+#pywebio-scope-aside .aside-item-active:hover {
+    background: linear-gradient(145deg, rgba(235, 246, 255, .98), rgba(196, 219, 255, .94));
+    border-color: rgba(69, 113, 210, .46);
+    box-shadow: inset 3px 0 0 #5279e8, inset 0 1px 0 rgba(255, 255, 255, .92), 0 5px 13px rgba(65, 104, 205, .18);
+    transform: none;
 }
 
 #pywebio-scope-aside .btn-aside:hover {
     color: #174f99 !important;
-    background: linear-gradient(145deg, #ffffff, #d9eaff);
-    border-color: rgba(58, 112, 190, .38);
-    box-shadow: inset 0 1px 0 #ffffff, 0 5px 12px rgba(48, 83, 135, .16);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
 }
 
 #pywebio-scope-aside .btn-aside-active,
 #pywebio-scope-aside .btn-aside-active:hover {
-    color: #ffffff !important;
-    background: var(--alas-sidebar-active);
-    border-color: rgba(75, 104, 220, .62);
-    box-shadow: 0 8px 20px var(--alas-aside-shadow), inset 0 1px 0 rgba(255, 255, 255, .62);
-    text-shadow: 0 1px 2px rgba(25, 49, 105, .36);
+    color: #102744 !important;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .95);
+    transform: none;
 }
 
 #pywebio-scope-aside .aside-icon,
 #pywebio-scope-aside .aside-icon > path,
 #pywebio-scope-aside .aside-icon path {
-    fill: #18365d !important;
+    fill: #16365f !important;
 }
 
 #pywebio-scope-aside .aside-item-active .aside-icon,
 #pywebio-scope-aside .aside-item-active .aside-icon > path,
 #pywebio-scope-aside .aside-item-active .aside-icon path {
-    fill: #ffffff !important;
+    fill: #102744 !important;
 }
 
 [id^="pywebio-scope-group_"],
@@ -114,7 +195,7 @@ body {
 #pywebio-scope-navigator {
     background-color: rgba(247, 252, 255, .82);
     background-image: linear-gradient(145deg, rgba(255, 255, 255, .72), rgba(224, 239, 255, .42));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .92), 0 5px 14px rgba(53, 91, 145, .09);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 2px 8px rgba(53, 91, 145, .07);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
@@ -134,6 +215,14 @@ body {
 #pywebio-scope-menu details > summary,
 #pywebio-scope-aside .btn-aside {
     transition-duration: .08s;
+}
+
+#pywebio-scope-aside div[style*="--aside-item--"].aside-item-active,
+#pywebio-scope-aside div[style*="--aside-item--"].aside-item-active:hover,
+#pywebio-scope-aside .btn-aside.btn-aside-active,
+#pywebio-scope-aside .btn-aside.btn-aside-active:hover {
+    transform: none;
+    transition: none;
 }
 
 
