@@ -1,0 +1,49 @@
+name: Sync upstream
+
+on:
+  schedule:
+    # Check upstream once per day at 04:17 UTC (12:17 Asia/Shanghai).
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream-master
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out personal fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - name: Fetch and merge upstream safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/LmeSzinc/AzurLaneAutoScript.git
+          git fetch --prune upstream master
+
+          if git merge-base --is-ancestor upstream/master HEAD; then
+            echo "The personal fork already contains the latest upstream changes."
+            exit 0
+          fi
+
+          # Keep personal-fork content when both sides change the same lines.
+          # Non-overlapping upstream changes are still merged normally.
+          if ! git merge --no-edit -X ours upstream/master; then
+            git merge --abort || true
+            echo "Upstream has a structural conflict; no files were pushed."
+            exit 1
+          fi
+
+          git push origin HEAD:master
+
