@@ -281,7 +281,7 @@ def put_icon_buttons(
             put_buttons(buttons, onclick).style(f"z-index: 2; --aside-{value}--;"),
         ],
         size="0",
-    )
+    ).style("--aside-item--")
 
 
 def put_none() -> Output:
