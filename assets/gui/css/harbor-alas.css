@@ -4,6 +4,9 @@
     --alas-surface-strong: #12263d;
     --alas-surface-soft: #152d49;
     --alas-sidebar: linear-gradient(180deg, #06101c, #0d1d31);
+    --alas-sidebar-text: #c5d7ee;
+    --alas-sidebar-active-text: #ffffff;
+    --alas-sidebar-active: rgba(99, 147, 255, .42);
     --alas-text: #e7f0fc;
     --alas-muted: #91a6c0;
     --alas-border: rgba(122, 164, 215, .18);
@@ -14,7 +17,7 @@
     --alas-log-text: #cad8e9;
     --alas-shadow: 0 18px 44px rgba(0, 7, 17, .42);
     --alas-shadow-soft: 0 6px 18px rgba(0, 7, 17, .28);
-    --alas-radius: 14px;
+    --alas-radius: 19px;
 }
 
 body,
@@ -27,4 +30,5 @@ pre.rich-traceback-code {
     color: #d6e2f1;
     background: #07111e;
 }
+
 
