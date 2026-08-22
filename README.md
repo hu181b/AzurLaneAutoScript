@@ -1,11 +1,9 @@
 **| [English](README_en.md) | 简体中文 | [日本語](README_jp.md) |**
 
-# AzurLaneAutoScript
-
 ## 本仓库说明 / Fork Notice
 
 > [!IMPORTANT]
-> 本仓库是基于 **AzurLaneAutoScript（Alas）** 的个人维护分支，并非原项目的官方发行版。
+> 本仓库是基于 **AzurLaneAutoScript（Alas）** 的维护分支，并非原项目的官方发行版。
 
 - **原始项目（上游）**：[LmeSzinc/AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript)
 - **本维护分支**：[hu181b/AzurLaneAutoScript](https://github.com/hu181b/AzurLaneAutoScript)
@@ -48,6 +46,12 @@
 ### 问题反馈说明
 
 如果问题只在本维护分支出现，尤其是主题、WebUI、更新或性能问题，请在本仓库反馈，不要将本分支特有问题提交给原项目。若确认问题可以在未经修改的上游版本中复现，请遵循原项目的问题模板和社区准则向上游反馈。
+
+---
+
+# AzurLaneAutoScript
+
+---
 
 #### Discord [![](https://img.shields.io/discord/720789890354249748?logo=discord&logoColor=ffffff&color=4e4c97)](https://discord.gg/AQN6GeJ) QQ群  ![](https://img.shields.io/badge/QQ%20Group-1087735381-4e4c97)
 Azur Lane bot with GUI (Supports CN, EN, JP, TW, able to support other servers), designed for 24/7 running scenes, can take over almost all Azur Lane gameplay. Azur Lane, as a mobile game, has entered the late stage of its life cycle. During the period from now to the server down, please reduce the time spent on the Azur Lane and leave everything to Alas.
